@@ -161,7 +161,11 @@ node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 
 | Variable | Required | Description |
 |---|---|---|
-| `VITE_API_URL` | ✅ | Backend base URL (e.g. `http://localhost:5000`) |
+| `VITE_API_URL` | ❌ | Backend base URL (e.g. `http://localhost:5000`). Leave empty when the backend is served from the same Vercel domain under `/api`. |
+
+### Vercel deployment
+
+The client and server must both be deployed for login to work. If the server is deployed separately, add `VITE_API_URL` to the Vercel project environment variables with the public server URL, then redeploy the client. For a same-domain deployment, leave it empty and ensure the `/api/*` rewrite points to the running server.
 
 ---
 

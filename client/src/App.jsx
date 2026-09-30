@@ -5,7 +5,7 @@ import ReviewPanel from './components/ReviewPanel';
 import History from './components/History';
 import AuthModal from './components/AuthModal';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || '';
 
 function App() {
   const [code, setCode] = useState('');
