@@ -1,12 +1,12 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { DEMO_CREDENTIALS, DEMO_USER_ID } from '../config/demoAuth.js';
+import { DEMO_CREDENTIALS, DEMO_JWT_SECRET, DEMO_USER_ID } from '../config/demoAuth.js';
 
 const generateToken = (userId, isDemo = false) => {
   return jwt.sign(
     { id: userId, demo: isDemo },
-    process.env.JWT_SECRET,
+    isDemo ? (process.env.JWT_SECRET || DEMO_JWT_SECRET) : process.env.JWT_SECRET,
     { expiresIn: '7d' }
   );
 };

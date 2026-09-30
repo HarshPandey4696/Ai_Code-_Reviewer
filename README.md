@@ -29,6 +29,7 @@ For quick demos without creating a MongoDB user, use the built-in demo account:
 - Password: `CodeReview@123`
 
 The demo account is intentionally shared and should not be used for private data.
+The demo login can work without `JWT_SECRET`; set `JWT_SECRET` in production to enable secure normal accounts and replace the public demo token secret.
 
 ### ⚡ Redis Caching
 Submitting the same code twice? The second result is returned **instantly** from Redis cache without calling the Gemini API again. Falls back gracefully if Redis is not installed.
