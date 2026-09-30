@@ -1,10 +1,11 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { DEMO_CREDENTIALS, DEMO_USER_ID } from '../config/demoAuth.js';
 
-const generateToken = (userId) => {
+const generateToken = (userId, isDemo = false) => {
   return jwt.sign(
-    { id: userId },
+    { id: userId, demo: isDemo },
     process.env.JWT_SECRET,
     { expiresIn: '7d' }
   );
@@ -47,6 +48,17 @@ export const login = async (req, res) => {
 
     if (!email || !password) {
       return res.status(400).json({ error: 'Email and password required' });
+    }
+
+    if (email.trim().toLowerCase() === DEMO_CREDENTIALS.email && password === DEMO_CREDENTIALS.password) {
+      return res.json({
+        token: generateToken(DEMO_USER_ID, true),
+        user: {
+          id: DEMO_USER_ID,
+          name: DEMO_CREDENTIALS.name,
+          email: DEMO_CREDENTIALS.email,
+        },
+      });
     }
 
     const user = await User.findOne({ email });

@@ -23,6 +23,13 @@ All reviews are automatically saved to MongoDB. Logged-in users see only their o
 ### 🔐 JWT Authentication
 Full register/login flow secured with **JSON Web Tokens** and **bcrypt** password hashing. Auth is optional — guests can still submit reviews, but won't get personalized history.
 
+For quick demos without creating a MongoDB user, use the built-in demo account:
+
+- Email: `demo@aicodereviewer.com`
+- Password: `CodeReview@123`
+
+The demo account is intentionally shared and should not be used for private data.
+
 ### ⚡ Redis Caching
 Submitting the same code twice? The second result is returned **instantly** from Redis cache without calling the Gemini API again. Falls back gracefully if Redis is not installed.
 
